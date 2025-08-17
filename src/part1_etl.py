@@ -16,3 +16,13 @@ data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
 os.makedirs(data_dir, exist_ok=True)
 
 # Load datasets and save to '/data'
+url = "https://github.com/cbuntain/umd.inst414/blob/main/data/imdb_movies_2000to2022.prolific.json?raw=true"
+df = pd.read_json(url, lines=True)
+
+# Save to CSV
+csv_path = os.path.join(data_dir, "imdb_movies_data.csv")
+df.to_csv(csv_path, index=False)
+
+# Save to json
+jsonl_path = os.path.join(data_dir, "imdb_movies_data.jsonl")
+df.to_json(jsonl_path, orient="records", lines=True)
